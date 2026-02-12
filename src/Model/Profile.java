@@ -1,49 +1,72 @@
 package Model;
 
+import java.util.List;
+
 public class Profile {
-    String name;
-    String prenom;
-    String pseudo;
+    private String nom;
+    private String prenom;
+    private String email;
+    private String telephone;
+    private String adresse;
+    private String sexe;
+    private String nationalite;
+    private int experienceAnnees;
+    private String imagePath;
+    private String couleurFavorite;
+    private List<String> langues;
+    private List<String> competences;
+    private List<String> hobbies;
+    private boolean permisConduire;
+    private boolean disponible;
 
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
-    }
-
-
+    // Constructeur
     public Profile() {
-        this.name = "";
-        this.prenom = "";
-        this.pseudo = "";
+        this.couleurFavorite = "#2980b9";
     }
 
-    public Profile(String name, String prenom, String pseudo) {
-        this.name = name;
-        this.prenom = prenom;
-        this.pseudo = pseudo;
-    }
+    // Getters et Setters
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
+    public String getPrenom() { return prenom; }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getTelephone() { return telephone; }
+    public void setTelephone(String telephone) { this.telephone = telephone; }
+
+    public String getAdresse() { return adresse; }
+    public void setAdresse(String adresse) { this.adresse = adresse; }
+
+    public String getSexe() { return sexe; }
+    public void setSexe(String sexe) { this.sexe = sexe; }
+
+    public String getNationalite() { return nationalite; }
+    public void setNationalite(String nationalite) { this.nationalite = nationalite; }
+
+    public int getExperienceAnnees() { return experienceAnnees; }
+    public void setExperienceAnnees(int experienceAnnees) { this.experienceAnnees = experienceAnnees; }
+
+    public String getImagePath() { return imagePath;}
+    public void setImagePath(String imagePath) { this.imagePath = imagePath; }
+
+    public String getCouleurFavorite() { return couleurFavorite; }
+    public void setCouleurFavorite(String couleurFavorite) { this.couleurFavorite = couleurFavorite; }
+
+    public List<String> getLangues() { return langues; }
+    public void setLangues(List<String> langues) { this.langues = langues; }
+
+    public List<String> getCompetences() { return competences; }
+    public void setCompetences(List<String> competences) { this.competences = competences; }
+
+    public List<String> getHobbies() { return hobbies; }
+    public void setHobbies(List<String> hobbies) { this.hobbies = hobbies; }
+
+    public boolean isPermisConduire() { return permisConduire; }
+    public void setPermisConduire(boolean permisConduire) { this.permisConduire = permisConduire; }
+
+    public boolean isDisponible() { return disponible; }
+    public void setDisponible(boolean disponible) { this.disponible = disponible; }
 }
