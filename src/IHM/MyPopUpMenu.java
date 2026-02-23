@@ -1,5 +1,7 @@
 package IHM;
 
+import Data.Profil;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +11,7 @@ import java.awt.event.ItemListener;
 public class MyPopUpMenu extends JPopupMenu {
     JMenuItem modifier,supprimer,supprimer_tout;
     GestionProfils gp;
+    Profil p;
 
     public MyPopUpMenu(GestionProfils gestionProfils) {
         this.gp = gestionProfils;
@@ -37,7 +40,6 @@ public class MyPopUpMenu extends JPopupMenu {
                 int index = gp.jl.getSelectedIndex();
                 String Pseudo = gp.jl.getSelectedValue();
                 gp.model.remove(index);
-
 
                 for (int i = gp.jtp.getTabCount() - 1; i >= 0; i--) {
                     if (gp.jtp.getTitleAt(i).equals(Pseudo)) {

@@ -1,5 +1,8 @@
 package IHM;
 
+import Data.Profil;
+import Data.DataProfil;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,10 +19,7 @@ public class GestionProfils extends javax.swing.JInternalFrame {
     JList<String> jl;
     DefaultListModel<String> model;
     JTabbedPane jtp;
-
-
-    DefaultListModel<String> listModel;
-    DefaultListModel<String> listModel1;
+    DataProfil dataProfil;
 
     public GestionProfils() {
         this.setTitle("Gestion Profils");
@@ -27,11 +27,12 @@ public class GestionProfils extends javax.swing.JInternalFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
 
-
         this.setMaximizable(true);
         this.setIconifiable(true);
         this.setResizable(true);
         this.setClosable(true);
+
+        this.dataProfil = new DataProfil();
 
         this.northPanel = new JPanel();
         this.northPanel.setLayout(new FlowLayout());
@@ -49,7 +50,18 @@ public class GestionProfils extends javax.swing.JInternalFrame {
         this.saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.addElement(tfPseudo.getText());
+                String pseudo = tfPseudo.getText();
+                String nom = tfNom.getText();
+                String prenom = tfPrenom.getText();
+
+                Profil p = new Profil(nom, prenom, pseudo);
+                dataProfil.addProfile(p);
+
+                model.addElement(pseudo);
+
+                tfNom.setText("");
+                tfPrenom.setText("");
+                tfPseudo.setText("");
             }
         });
 
@@ -69,12 +81,11 @@ public class GestionProfils extends javax.swing.JInternalFrame {
 
         this.jl = new JList<>();
         this.jl.setPreferredSize(new Dimension(400, 300));
+
         this.model = new DefaultListModel<>();
         this.jl.setModel(this.model);
 
         this.jtp  = new JTabbedPane();
-//        this.jtp.addTab("T1", new JPanel());
-//        this.jtp.addTab("T2", new JPanel());
 
         this.jsp.setLeftComponent(jl);
         this.jsp.setRightComponent(jtp);
@@ -87,13 +98,12 @@ public class GestionProfils extends javax.swing.JInternalFrame {
         this.tfPrenom.addMouseListener(new EcouteurHelp(this));
         this.tfPseudo.addMouseListener(new EcouteurHelp(this));
 
-
-
         jl.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if(e.getClickCount() == 2) {
                     String ps = jl.getSelectedValue();
-                    FormPannel fp = new FormPannel(ps);
+                    Profil profil = dataProfil.getProfilByPseudo(ps);
+                    FormPannel fp = new FormPannel(profil, dataProfil);
                     jtp.addTab(ps, fp);
                 }
                 if(e.getButton() == MouseEvent.BUTTON3) {
@@ -102,8 +112,5 @@ public class GestionProfils extends javax.swing.JInternalFrame {
                 }
             }
         });
-
-
     }
-
 }
