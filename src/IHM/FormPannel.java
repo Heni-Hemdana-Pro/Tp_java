@@ -13,11 +13,12 @@ public class FormPannel extends JPanel {
     Profil profil;
     DataProfil dataProfil;
     JLabel lbl_bonjour, lbl_Langues;
-    JPanel mainPanel, LanguePanel, NamePanel, PanelLangue, BouttonPannel, panelAnnee;
+    JPanel mainPanel, LanguePanel, NamePanel, PanelLangue, BouttonPannel, panelAnnee,cyclepanel,LabelAnnee;
     JButton btnPlus;
     JComboBox<String> Cycle;
-    JPanel panelAnnees;
+//    JPanel panelAnnees;
     JButton btnSave, btnFermer;
+    JCheckBox cb1, cb2, cb3;
 
     HashMap<String, JSpinner> languesSpinners;
 
@@ -82,36 +83,36 @@ public class FormPannel extends JPanel {
 
 
         this.Cycle = new JComboBox<>(new String[]{"1er cycle", "2eme cycle"});
-        this.Cycle.setPreferredSize(new Dimension(50, 30));
         this.Cycle.addActionListener(new ActionListener() {
 
             JLabel LabelAnnee;
-            JCheckBox cb1, cb2, cb3;
+
+
 
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                FormPannel.this.panelAnnees.removeAll();
+                FormPannel.this.panelAnnee.removeAll();
 
                 String Cycle = (String) FormPannel.this.Cycle.getSelectedItem();
 
                 if ("1er cycle".equals(Cycle)) {
                     this.LabelAnnee = new JLabel("Année: ");
                     FormPannel.this.panelAnnee.add(this.LabelAnnee);
-                    this.cb1 = new JCheckBox("1");
-                    this.cb2 = new JCheckBox("2");
-                    FormPannel.this.panelAnnee.add(this.cb1);
-                    FormPannel.this.panelAnnee.add(this.cb2);
+                    FormPannel.this.cb1 = new JCheckBox("1");
+                    FormPannel.this.cb2 = new JCheckBox("2");
+                    FormPannel.this.panelAnnee.add(cb1);
+                    FormPannel.this.panelAnnee.add(cb2);
                 }
                 else if ("2eme cycle".equals(Cycle)) {
                     this.LabelAnnee = new JLabel("Année: ");
                     FormPannel.this.panelAnnee.add(this.LabelAnnee);
-                    this.cb1 = new JCheckBox("1");
-                    this.cb2 = new JCheckBox("2");
-                    this.cb3 = new JCheckBox("3");
-                    FormPannel.this.panelAnnee.add(this.cb1);
-                    FormPannel.this.panelAnnee.add(this.cb2);
-                    FormPannel.this.panelAnnee.add(this.cb3);
+                    FormPannel.this.cb1 = new JCheckBox("1");
+                    FormPannel.this.cb2 = new JCheckBox("2");
+                    FormPannel.this.cb3 = new JCheckBox("3");
+                    FormPannel.this.panelAnnee.add(cb1);
+                    FormPannel.this.panelAnnee.add(cb2);
+                    FormPannel.this.panelAnnee.add(cb3);
                 }
 
                 FormPannel.this.panelAnnee.revalidate();
@@ -129,7 +130,22 @@ public class FormPannel extends JPanel {
         this.btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                profil.getLangues().clear();
+                for (String key : languesSpinners.keySet()) {
+                    profil.getLangues().put(key, (Integer) languesSpinners.get(key).getValue());
+                }
 
+                profil.setCycleIngenieur((String) Cycle.getSelectedItem());
+
+                profil.getAnnees().clear();
+                if (cb1 != null)
+                    profil.getAnnees().put("1", cb1.isSelected());
+                if (cb2 != null)
+                    profil.getAnnees().put("2", cb2.isSelected());
+                if (cb3 != null)
+                    profil.getAnnees().put("3", cb3.isSelected());
+
+                JOptionPane.showMessageDialog(FormPannel.this, "Profil sauvegardé!");
             }
         });
 

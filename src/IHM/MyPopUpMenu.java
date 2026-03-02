@@ -50,5 +50,12 @@ public class MyPopUpMenu extends JPopupMenu {
             }
         });
 
+        this.modifier.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
     }
 }
