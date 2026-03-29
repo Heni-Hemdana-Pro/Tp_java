@@ -94,22 +94,11 @@ public class EtudiantTableModel extends AbstractTableModel {
         }
     }
 
-//    public void supprimerEtudiant(int cin) {
-//        int a = imp.deleteEtudiant(cin);
-//
-//        if(a > 0) {
-//
-//            fireTableDataChanged();
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Erreur de suppression");
-//        }
-//    }
 
     public void supprimerEtudiant(int cin) {
         int a = imp.deleteEtudiant(cin);
 
         if(a > 0) {
-            // Trouver et supprimer la ligne correspondante dans data
             for(int i = 0; i < data.size(); i++) {
                 if((Integer)data.get(i)[0] == cin) {
                     data.remove(i);
